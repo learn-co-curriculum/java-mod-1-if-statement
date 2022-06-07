@@ -101,3 +101,17 @@ In the example above, we want to further customize the greeting message for
 users younger than 18, so we check if they're also younger than 10, and display
 a special message if that's the case. If not, we simply welcome them without a
 special message.
+
+Can you modify the code in the previous example to remove the duplicated line of
+code between the case where the user is younger than 10 and the case where the
+user is younger than 18 but not younger than 10?
+
+```java
+if (age < 18) {
+    System.out.println("Hello kiddos");
+    if (age < 10) {
+        System.out.println("Impressively young to be learning this!");
+    }
+    System.out.println("Good to see you here!");
+}
+```
