@@ -2,9 +2,19 @@
 
 ## Learning Goals
 
-- Use the `if` statement
+- Learn about conditionals
+- Learn how to use the `if` statement
 
 ## The `if` statement in Java
+
+In Java, code will run sequentially unless specified otherwise. We have seen
+in the Execution Path lesson how code can jump around when methods are called.
+But even then, all our code so far would still be considered "unconditional".
+This means that the code is written in a sequential manner without any logic
+applied. Wouldn't it be great if we could say "If this is true... do this thing
+first"? Well turns out, we can! Statements and logic like that are called
+**conditionals** where we interrupt the flow of the program with some logic.
+12345678910111213141516171819202122232425262728293031323334353637383940404143454
 
 All the code examples we have used so far have been "unconditional", meaning
 that when we've instructed the computer to do something, it's been in the form
