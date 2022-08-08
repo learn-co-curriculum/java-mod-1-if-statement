@@ -92,6 +92,23 @@ if (true) {
 }
 ```
 
+An `if` statement can also be followed by an `else if` statement. When an
+`else if` statement follows an `if`, the `else if` allows us to specify
+another condition whenever the conditional clause of the `if` statement is
+not true. It is similar to an `else` in that it is not required to follow
+an `if` statement but differs in that it has another conditional clause
+attached to it. Let's alter our `if` block to see this:
+
+```java
+if (grade > 70) {
+    System.out.println("Congrats! You passed!");
+} else if (grade == 70) {
+    System.out.println("Whew! You just passed!")
+} else {
+    System.out.println("Oops! Better luck next time!");
+}
+```
+
 Since `if` statements can contain multiple statements inside their `if` block,
 they can also contain other `if` statements:
 
