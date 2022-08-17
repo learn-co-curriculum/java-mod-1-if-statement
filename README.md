@@ -2,49 +2,58 @@
 
 ## Learning Goals
 
-- Use the `if` statement
+- Learn about conditionals
+- Learn how to use the `if` statement
 
 ## The `if` statement in Java
 
-All the code examples we have used so far have been "unconditional", meaning
-that when we've instructed the computer to do something, it's been in the form
-of "always do this thing". Even when we've provided multiple statements, they've
-been in the form of "always do this first thing, then always do this second
-thing".
+In Java, code will run sequentially unless specified otherwise. We have seen
+in the Execution Path lesson how code can jump around when methods are called.
+But even then, all our code so far would still be considered "unconditional".
+This means that the code is written in a sequential manner without any logic
+applied. Wouldn't it be great if we could say "If this is true... do this thing
+first"? Well turns out, we can! Statements and logic like that are called
+**conditionals** where we interrupt the flow of the program with some logic.
 
-It's not hard to imagine that we might want conditional behavior sometimes. For
-example, I could have different greetings for people of different ages in my
-"Hello, World" program:
+Let's go back to our `Student` class. Say we want to send a message to a student
+if they got a certain grade on a recent test:
 
 ```java
-int birthYear = 2000;
-int currentYear = 2020;
-int age = currentYear - birthYear;
-if (age > 18) {
-    System.out.println("Look at you, all grown up");
-}
-if (age < 18) {
-    System.out.println("Hi kiddo!");
+public class Student {
+    private String firstName;
+    private String lastName;
+    private String major;
+
+    /**
+     * Take in a student numeric grade and provide feedback
+     * on how they did on a test
+     * @param grade : int - numeric grade the student received
+     *                on the test
+     */
+    public void calculateGrade(int grade) {
+        if (grade >= 70) {
+            System.out.println("Congrats! You passed!");
+        }
+    }
 }
 ```
 
-You now understand what happens up to line 3 - we end up with a variable of name
-`age`, which has a value of `20` stored in it. Let's break down the statement on
-line 4:
+Let's break down the statement on the first line in the calculateGrade()
+method:
 
 ```java
-if (age > 18) {
+if (grade >= 70) {
 ```
 
 The `if` statement allows us to specify a "condition". In Java, an `if`
 statement is immediately followed by an open parenthesis `(`, what we call a
-"condition clause" and a close parenthesis `)`. The condition clause is any
-expression that can evaluate to either "true" or "false".
+"conditional clause" and a close parenthesis `)`. The **conditional clause** is
+any expression that can evaluate to either "true" or "false".
 
-In this case, either the `age` is greater than 18 or it's not. If it's greater
-than 18, then the program will execute the content of the `if` block. If the age
-is not greater than 18, then the program will not execute the content of the
-`if` block.
+In this case, either the `grade` is greater than or equal to 70, or it's not.
+If it's greater than or equal to 70, then the program will execute the
+content of the `if` block. If the grade less than 70, then the program will not
+execute the content of the `if` block.
 
 Like a Java class, an `if` statement can contain multiple statements inside it.
 Therefore, an `if` statement can be followed by an open curly brace `{` if it is
@@ -53,26 +62,27 @@ always, the open curly brace `{` must then be matched with a close curly brace
 `}`:
 
 ```java
-if (age > 18) {
+if (grade >= 70) {
     // as many conditional statements here
     // as I need for my program
 }
 ```
 
-Note that if you only have one conditional statement, you can omit the matching
+Note that if we only have one conditional statement, we can omit the matching
 curly braces:
 
 ```java
-if (age > 18)
-    System.out.println("Look at you, all grown up");
+if (grade >= 70)
+    System.out.println("Congrats! You passed!");
 ```
 
-I do not recommend this notation, as it makes it very easy to accidentally
+This notation is not recommended, as it makes it very easy to accidentally
 expand or reduce the scope of an `if` statement.
 
-An `if` statement can be followed by, but does not have to, an `else` statement.
-When an `else` follows an `if`, its content will be executed whenever the
-conditional clause of the `if` is not true:
+An `if` statement can be followed by an `else` statement. When an `else`
+follows an `if`, its content will be executed whenever the conditional clause
+of the `if` statement is not true. It should be noted that an `else` statement
+is not required to follow an `if` statement.
 
 ```java
 if (true) {
@@ -82,36 +92,55 @@ if (true) {
 }
 ```
 
+An `if` statement can also be followed by an `else if` statement. When an
+`else if` statement follows an `if`, the `else if` allows us to specify
+another condition whenever the conditional clause of the `if` statement is
+not true. It is similar to an `else` in that it is not required to follow
+an `if` statement but differs in that it has another conditional clause
+attached to it. Let's alter our `if` block to see this:
+
+```java
+if (grade > 70) {
+    System.out.println("Congrats! You passed!");
+} else if (grade == 70) {
+    System.out.println("Whew! You just passed!")
+} else {
+    System.out.println("Oops! Better luck next time!");
+}
+```
+
 Since `if` statements can contain multiple statements inside their `if` block,
 they can also contain other `if` statements:
 
 ```java
-if (age < 18) {
-    System.out.println("Hello kiddos");
-    if (age < 10) {
-        System.out.println("Impressively young to be learning this!");
-        System.out.println("Good to see you here!");
+if (grade >= 70) {
+    System.out.println("Congrats! You passed!");
+    if (grade >= 90) {
+        System.out.println("Wow! You got an A!");
+        System.out.println("Great job!");
     } else {
-        System.out.println("Good to see you here!");
+        System.out.println("Great job!");
     }
 }
 ```
 
 In the example above, we want to further customize the greeting message for
-users younger than 18, so we check if they're also younger than 10, and display
-a special message if that's the case. If not, we simply welcome them without a
-special message.
+students that pass their test. We want to give an extra congratulations to
+those students who receive a score of 90 and up; so we check to see if their
+grade is greater than or equal to a 90 and display a message if that is the
+case. If not, we simply tell them they did a great job on the test.
 
-Can you modify the code in the previous example to remove the duplicated line of
-code between the case where the user is younger than 10 and the case where the
-user is younger than 18 but not younger than 10?
+Can we modify the code in the previous example to remove the duplicated line of
+code between the case where the student's grade is greater than or equal to 90
+and the case where the student's grade is less than 90 but greater than or
+equal to 70?
 
 ```java
-if (age < 18) {
-    System.out.println("Hello kiddos");
-    if (age < 10) {
-        System.out.println("Impressively young to be learning this!");
+if (grade >= 70) {
+    System.out.println("Congrats! You passed!");
+    if (grade >= 90) {
+        System.out.println("Wow! You got an A!");
     }
-    System.out.println("Good to see you here!");
+    System.out.println("Great job!");
 }
 ```
